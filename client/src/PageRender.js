@@ -15,14 +15,20 @@ const generatePage =(pageName) => {
 
 const PageRender = () => {
     const {page, id} = useParams()
+    console.log(page)
 
     let pageName = "";
 
     if(id){
+        console.log("Ethi ethi id Ethi")
         pageName = `${page}/[id]`
     }else{
+        console.log("Ethi ethi elsamma Ethi")
+        console.log("Page Name",pageName)
         pageName =`${page}`
     }
+    console.log("Purath ethi");
+
   return generatePage(pageName)
 }
 
