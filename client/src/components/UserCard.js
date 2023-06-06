@@ -1,14 +1,26 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import Avatar from './Avatar'
 
-const UserCard = ({user, border}) => {
+const UserCard = ({user, border, handleClose}) => {
+  console.log(user)
+  const handleCloseAll = () => {
+      if (handleClose) handleClose()
+
+  }
   return (
     <div className={`d-flex p-2 align-item-center ${border}`}>
-        <Avatar sec={user.avatar} size="big-avatar" />
-        <div className='ml-1'style={{transform: 'translateY(-2px)'}}>
-            <span className='d-block'>{user.username}</span>
-            <small style={{opacity: 0.7}}>{user.fullname}</small>
-        </div>
+      <div>
+        <Link to={`/profile/${user.id}`} onClick={handleCloseAll}
+        className="d-flex align-item-center" >
+            <Avatar sec={user.avatar} size="big-avatar" />
+            <div className='ml-1'style={{transform: 'translateY(-2px)'}}>
+                <span className='d-block'>{user.username}</span>
+                <small style={{opacity: 0.7}}>{user.fullname}</small>
+            </div>
+        </Link>
+      </div>
+        
     </div>
   )
 }
