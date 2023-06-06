@@ -1,4 +1,4 @@
-import { PROFILE_TYPES } from "../actions/profileActions";
+import { PROFILE_TYPES } from "../actions/profileAction";
 
 const initialState = {
     loading: false,
@@ -13,6 +13,7 @@ const profileReducer = (state = initialState,action) => {
                 loading: action.payload
             };
         case PROFILE_TYPES.GET_USER:
+            //console.log(action.payload);
             return {
                 ...state,
                 loading: [...state.users, action.payload.user]
