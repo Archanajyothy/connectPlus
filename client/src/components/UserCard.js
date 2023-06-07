@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom'
 import Avatar from './Avatar'
 
 const UserCard = ({user, border, handleClose}) => {
-  console.log(user)
   const handleCloseAll = () => {
       if (handleClose) handleClose()
 
@@ -11,7 +10,7 @@ const UserCard = ({user, border, handleClose}) => {
   return (
     <div className={`d-flex p-2 align-item-center ${border}`}>
       <div>
-        <Link to={`/profile/${user.id}`} onClick={handleCloseAll}
+        <Link to={`/profile/${user._id}`} onClick={handleCloseAll}
         className="d-flex align-item-center" >
             <Avatar sec={user.avatar} size="big-avatar" />
             <div className='ml-1'style={{transform: 'translateY(-2px)'}}>

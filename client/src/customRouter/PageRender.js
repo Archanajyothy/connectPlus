@@ -28,8 +28,6 @@ const PageRender = () => {
         }
     }
 
-    console.log("Purath ethi");
-
   return generatePage(pageName)
 }
 

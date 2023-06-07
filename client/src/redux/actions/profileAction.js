@@ -2,15 +2,15 @@ import { GLOBALTYPES } from './globalTypes'
 import { getDataAPI } from '../../utils/fetchData'
 
 export const PROFILE_TYPES = {
+    RESET_PROFILE : 'RESET_PROFILE',
     LOADING : 'LOADING',
     GET_USER : 'GET_USER'
 }
 
 export const getProfileUsers = ({users, id, auth}) => async (dispatch) => {
-    // console.log({users, id, auth}); 
-    // console.log('user il keri'); 
     if (users.every(user => user._id !== id)) {
         try {
+            dispatch({ type: PROFILE_TYPES.RESET_PROFILE }); // Reset the profile state
             dispatch({type: PROFILE_TYPES.LOADING, payload: true})
             const res = await getDataAPI(`/user/${id}`,auth.token)
             dispatch({

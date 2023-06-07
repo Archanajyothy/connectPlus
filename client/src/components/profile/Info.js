@@ -8,7 +8,8 @@ const Info = () => {
     const { id } = useParams()
     const { auth, profile } = useSelector(state => state)
     const dispatch = useDispatch()
-
+    
+    
     const [userData, setUserData] = useState([])
 
     useEffect(() => {
@@ -17,7 +18,7 @@ const Info = () => {
         }else{
             dispatch(getProfileUsers({users: profile.users, id, auth}))
             const newData = profile.users.filter(user => user._id === id)
-            setUserData(newData)
+            setUserData([newData[0]])
         }
     },[id, auth, dispatch, profile.users])
   return (

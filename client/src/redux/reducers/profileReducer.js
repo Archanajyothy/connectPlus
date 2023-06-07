@@ -13,11 +13,12 @@ const profileReducer = (state = initialState,action) => {
                 loading: action.payload
             };
         case PROFILE_TYPES.GET_USER:
-            //console.log(action.payload);
             return {
                 ...state,
-                loading: [...state.users, action.payload.user]
+                users: [...state.users, action.payload.user]
             };
+        case PROFILE_TYPES.RESET_PROFILE:
+            return initialState; // Reset the state to the initial state
         default:
             return state;
     }
