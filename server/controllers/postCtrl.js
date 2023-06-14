@@ -22,6 +22,21 @@ const postCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
+    },
+    getPosts: async (req, res) => {
+        try {
+            const posts = await Posts.find({
+                user: [...req.user.following, req.user._id]
+            }).populate("user likes","avatar username fullname")
+
+            res.json({
+                msg: 'Success!',
+                result: posts.length,
+                posts
+            })
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
     }
 }
 
