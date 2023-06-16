@@ -12,7 +12,7 @@ const auth = async (req, res, next) => {
         if(!decoded) return res.status(400).json({msg: "Invalid Authentication"})
 
         const user = await Users.findOne({_id: decoded.id})
-        console.log('inside auth middleware',user);
+        //console.log('inside auth middleware',user);
 
         req.user = user
         next()
