@@ -6,7 +6,8 @@ export const POST_TYPES = {
     CREATE_POST: 'CREATE_POST',
     LOADING_POST: 'LOADING_POST',
     GET_POSTS: 'GET_POSTS',
-    UPDATE_POST: 'UPDATE_POST'
+    UPDATE_POST: 'UPDATE_POST',
+    GET_POST: 'GET_POST'
 }
 
 
@@ -58,7 +59,7 @@ export const updatePost = ({content, images, auth, status}) => async (dispatch) 
     const imgNewUrl = images.filter(img => !img.url)
     const imgOldUrl = images.filter(img => img.url)
 
-    console.log({imgNewUrl,imgOldUrl});
+    //console.log({imgNewUrl,imgOldUrl});
     if(status.content === content 
         && imgNewUrl.length === 0 
         && imgOldUrl.length === status.images.length
@@ -108,5 +109,19 @@ export const unLikePost = ({post, auth}) => async (dispatch) => {
             type: GLOBALTYPES.ALERT,
             payload: {error: err.response.data.msg}
         })
+    }
+}
+
+export const getPost = ({detailPost, id, auth}) => async (dispatch) => {
+    if(detailPost.every(post => post._id !== id)){
+        try {
+            const res = await getDataAPI(`post/${id}`,auth.token)
+            dispatch({ type: POST_TYPES.GET_POST, payload: res.data.post})
+        } catch (err) {
+            dispatch({
+                type: GLOBALTYPES.ALERT,
+                payload: {error: err.response.data.msg}
+            })
+        }
     }
 }
