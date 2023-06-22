@@ -7,6 +7,7 @@ import status from "./statusReducer";
 import homePosts from "./postReducer";
 import modal from "./modalReducers";
 import detailPost from "./detailPostReducer";
+import discover from "./discoverReducer"
 
 
 export default combineReducers({
@@ -17,5 +18,6 @@ export default combineReducers({
     status,
     homePosts,
     modal,
-    detailPost  
+    detailPost,
+    discover
 })

@@ -1,5 +1,20 @@
 const Posts = require('../models/postModel')
 
+class APIfeatures {
+    constructor(query, queryString){
+        this.query = query;
+        this.queryString = queryString;
+    }
+
+    paginating(){
+        const page = this.queryString.page * 1 || 1
+        const limit = this.queryString.limit * 1 || 9
+        const skip = (page -1) * limit
+        this.query = this.query.skip(skip).limit(limit)
+        return this;
+    }
+}
+
 
 const postCtrl = {
     createPost: async (req, res) => {
@@ -25,9 +40,11 @@ const postCtrl = {
     },
     getPosts: async (req, res) => {
         try {
-            const posts = await Posts.find({
+            const features = new APIfeatures(Posts.find({
                 user: [...req.user.following, req.user._id]
-            }).sort('-createdAt')
+            }),req.query).paginating()
+
+            const posts = await features.query.sort('-createdAt')
             .populate("user likes","avatar username fullname")
             .populate({
                 path: "comments",
@@ -102,7 +119,9 @@ const postCtrl = {
     },
     getUserPosts: async (req, res) => {
         try {
-           const posts = await Posts.find({user: req.params.id}).sort("-createdAt") 
+            const features = new APIfeatures(Posts.find({user: req.params.id}), req.query)
+            .paginating()
+           const posts = await features.query.sort("-createdAt") 
 
            res.json({
             posts,
@@ -115,7 +134,7 @@ const postCtrl = {
     getPost: async (req, res) => {
         try {
            const post = await Posts.findById( req.params.id)
-           .populate("user likes","avatar username fullname")
+           .populate("user likes","avatar username fullname followers")
            .populate({
                path: "comments",
                populate: {
@@ -123,9 +142,29 @@ const postCtrl = {
                    select: "-password"
                }
            })
+
+           if(!post) return res.status(400).json({msg: 'This post does not exist.'})
            
            res.json({post})
 
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    getPostsDiscover: async (req, res) => {
+        try {
+            const features = new APIfeatures(Posts.find({
+                user: {$nin: [...req.user.following, req.user._id]}
+            }), req.query).paginating()
+
+            const posts = await features.query.sort('-createdAt')
+            
+
+            res.json({
+                msg: 'Success!',
+                result: posts.length,
+                posts
+            })
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
