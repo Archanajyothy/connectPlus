@@ -67,8 +67,11 @@
   /*----------- Post Thumb ------------*/
   @import url("./post_thumb.css");
 
+  /*----------- Message ------------*/
+  @import url("./message.css");
+
   /* --------Responssive-------- */
-@media (max-width:  768px){
+@media (max-width: 768px){
   .header .menu{
       position: absolute;
       top: calc(100vh - 50px);
@@ -95,13 +98,15 @@
   }
   .header .logo{
       margin:auto;
-      font-size: 1rem;
   }
   .header .logo h1{
       font-size: 1.5rem;
   }
   .wrap_page{
     margin-bottom: 60px;
+  }
+  .message{
+    height: calc(100vh - 150px);
   }
 }
   
