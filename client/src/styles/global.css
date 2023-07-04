@@ -70,6 +70,9 @@
   /*----------- Message ------------*/
   @import url("./message.css");
 
+  /*----------- Icons ------------*/
+  @import url("./icons.css");
+
   /* --------Responssive-------- */
 @media (max-width: 768px){
   .header .menu{
