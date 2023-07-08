@@ -32,7 +32,9 @@
     return (
       <div className='auth_page'>
           <form onSubmit={handleSubmit}>
-              <h3 className='text-uppercase text-center mb-4'>Connect+</h3>
+              <img src="https://res.cloudinary.com/connect-plus/image/upload/v1688822979/connect-plus/Logo/connect_vlmzyw.svg" alt="logo" 
+              style={{ width: '279px', height: '50px', paddingLeft: '40px', margin: '-10px 0 20px 0' }} />
+              {/* <h3 className='text-uppercase text-center mb-4'>Connect+</h3> */}
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input type="email" className="form-control" id="exampleInputEmail1" name="email"

@@ -14,9 +14,9 @@
     height: 100%;
     background: pink;
 }
-.header .logo h1{
+/* .header .logo h1{
     font-size: 2rem;
-}
+} */
 /*---------Header Menu--------*/
 .header .menu li{
     opacity: 0.5;
