@@ -73,6 +73,9 @@
   /*----------- Icons ------------*/
   @import url("./icons.css");
 
+  /*----------- Call Modal ------------*/
+  @import url("./call_modal.css");
+
   /* --------Responssive-------- */
 @media (max-width: 768px){
   .header .menu{
