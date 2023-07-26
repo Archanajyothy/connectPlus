@@ -1,0 +1,41 @@
+.admin-sidebar {
+    background-color: #f8f9fa;
+    padding: 20px;
+    width: 250px;
+    margin-top: 135px;
+    margin-left: 155px;
+    position: fixed; /* Add this line */
+    left: 0; /* Add this line */
+    top: 0; /* Add this line */
+    bottom: 0; /* Add this line */
+  }
+  
+  .admin-sidebar h3 {
+    margin-bottom: 20px;
+  }
+  
+  .admin-sidebar ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .admin-sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  .admin-sidebar a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .admin-sidebar a:hover {
+    color: #007bff;
+  }
+  
+  @media (max-width: 768px) {
+    .admin-sidebar {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  

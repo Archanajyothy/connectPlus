@@ -64,6 +64,18 @@
   /*----------- Comments ------------*/
   @import url("./comments.css");
 
+  /*----------- Admin home ------------*/
+  @import url("./adminhome.css");
+
+  /*----------- usermanagement ------------*/
+  @import url("./usermanagement.css");
+
+  /*----------- postmanagement ------------*/
+  @import url("./postmanagement.css");
+
+  /*----------- admin sidebar ------------*/
+  @import url("./adminsidebar.css");
+
   /*----------- Post Thumb ------------*/
   @import url("./post_thumb.css");
 

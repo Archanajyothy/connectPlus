@@ -198,6 +198,21 @@ const postCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    reportPost: async (req, res) => {
+        try {
+
+          const post = await Posts.findOneAndUpdate(
+            { _id: req.params.id },
+            { $addToSet: { reports: req.user._id } },
+            { new: true }
+          );
+          
+          res.json({ msg: 'Post reported!', report: { postId: post._id, reports: post.reports } });
+      
+        } catch (err) {
+          return res.status(500).json({ msg: err.message });
+        }
+    },      
     savePost: async (req, res) => {
         try {
             const user = await Users.find({_id: req.user._id, saved: req.params.id})

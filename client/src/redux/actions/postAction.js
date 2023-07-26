@@ -9,7 +9,8 @@ export const POST_TYPES = {
     GET_POSTS: 'GET_POSTS',
     UPDATE_POST: 'UPDATE_POST',
     GET_POST: 'GET_POST',
-    DELETE_POST: 'DELETE_POST'
+    DELETE_POST: 'DELETE_POST',
+    REPORT_POST: 'REPORT_POST'
 }
 
 
@@ -191,6 +192,25 @@ export const deletePost = ({post, auth, socket}) => async (dispatch) => {
         })
     }
 }
+
+export const reportPost = ({ postId, auth, socket }) => async dispatch => {
+  try {
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } });
+
+    const res = await postDataAPI(`post/${postId}/report`, null, auth.token);
+
+    dispatch({ type: POST_TYPES.REPORT_POST, payload: res.data });
+
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } });
+
+    // Emit a socket event for post reporting
+    socket.emit('reportPost', res.data.report);
+
+  } catch (err) {
+    console.log("Error : ",err)
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } });
+  }
+};
 
 export const savePost = ({post, auth}) => async (dispatch) => {
     const newUser = {...auth.user, saved: [...auth.user.saved, post._id]}

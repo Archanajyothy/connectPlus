@@ -28,7 +28,15 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:"https://res.cloudinary.com/connect-plus/image/upload/v1686164080/avatar/avatar_cugq40_vv192n.png"
     },
-    role:{type:String,default:'user'},
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    },
+    blocked: {
+        type: Boolean,
+        default: false
+    },
     gender:{type:String,default:'male'},
     mobile:{type:String,default:''},
     address:{type: String,default:''},

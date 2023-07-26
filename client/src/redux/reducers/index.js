@@ -15,6 +15,8 @@ import message from "./messageReducer";
 import online from "./onlineReducer";
 import call from "./callReducer";
 import peer from "./peerReducer";
+import usermanagement from "./usermanagementReducer";
+import postmanagement from "./postmanagementReducer";
 
 
 export default combineReducers({
@@ -33,5 +35,7 @@ export default combineReducers({
     message,
     online,
     call,
-    peer
+    peer,
+    usermanagement,
+    postmanagement
 })

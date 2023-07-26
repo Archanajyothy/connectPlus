@@ -61,6 +61,8 @@ const authCtrl = {
             const isMatch = await bcrypt.compare(password,user.password)
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
 
+            if(user.blocked===true) return res.status(400).json({msg: "User is Blocked. You can write a mail to admin@connectplus.com"})
+
             const access_token = createAccessToken({id: user._id})
             const refresh_token = createRefreshToken({id: user._id})
 
@@ -76,7 +78,8 @@ const authCtrl = {
                 user:{
                     ...user._doc,
                     password:''
-                }
+                },
+                role:user.role
             })
 
         }catch(err){

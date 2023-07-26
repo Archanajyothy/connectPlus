@@ -37,6 +37,13 @@ const postReducer = (state = initialState, action) => {
                 ...state,
                 posts: DeleteData(state.posts, action.payload._id)
             };
+        case POST_TYPES.REPORT_POST:
+            return {
+                ...state,
+                posts: state.posts.map(post =>
+                post._id === action.payload.report.postId ? { ...post, reports: action.payload.report.reports } : post
+                )
+        };
         default:
             return state;
     }

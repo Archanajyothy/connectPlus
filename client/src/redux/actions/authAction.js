@@ -9,12 +9,15 @@ export const login = (data) => async (dispatch) => {
         const res = await postDataAPI('login', data);
         console.log(res);
         localStorage.setItem("firstLogin",true)
+        localStorage.setItem("role", res.data.role);
+
 
         dispatch({ 
             type: GLOBALTYPES.AUTH, 
             payload: {
                 token: res.data.access_token,
-                user: res.data.user
+                user: res.data.user,
+                role: res.data.role
             } 
         })
 
@@ -38,6 +41,7 @@ export const login = (data) => async (dispatch) => {
 export const refreshToken =() => async (dispatch) => {
     const firstLogin = localStorage.getItem("firstLogin")
     if(firstLogin){
+
         dispatch({type: GLOBALTYPES.ALERT, payload: {loading: true} })
         try {
             const res = await postDataAPI('refresh_token')
