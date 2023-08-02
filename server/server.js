@@ -5,7 +5,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const { Socket } = require('socket.io')
 const SocketServer = require('./socketServer')
-const { PeerServer } = require('peer')
+const { ExpressPeerServer } = require('peer')
 
 const app = express()
 app.use(express.json())
@@ -21,7 +21,7 @@ io.on('connection', socket => {
 })
 
 //Create Peer Server
-PeerServer({ port: 3001, path: '/' })
+ExpressPeerServer(http, { path: '/' })
 
 //Routes
 app.get("/", (req,res)=>{

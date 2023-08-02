@@ -37,6 +37,13 @@ const RightSidebar = () => {
             </div>
         }
         <div style={{opacity: 0.5}} className='my-2' >
+            <a href='https://www.youtube.com/@curiousAJLeo' target='_blank' rel='noreferrer' 
+            style={{wordBreak: 'break-all'}} >
+                https://www.youtube.com/@curiousAJLeo
+            </a>
+            <small className='d-block'>
+                Welcome to my channel curiousAJ
+            </small>
             <small>
                 &copy; 2023 ConnectPlus
             </small>

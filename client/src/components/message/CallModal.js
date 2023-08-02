@@ -18,6 +18,7 @@ const CallModal = () => {
     const youVideo = useRef()
     const otherVideo = useRef()
     const [tracks, setTracks] = useState(null)
+    const [newCall, setNewCall] = useState(null)
 
     // Set Time
     useEffect(() => {
@@ -53,6 +54,7 @@ const CallModal = () => {
 
     const handleEndCall = () => {
         tracks && tracks.forEach(track => track.stop())
+        if(newCall) newCall.close()
         let times = answer ? total : 0
         socket.emit('endCall', {...call, times})
 
@@ -78,12 +80,13 @@ const CallModal = () => {
     useEffect(() => {
         socket.on('endCallToClient', data => {
             tracks && tracks.forEach(track => track.stop())
+            if(newCall) newCall.close()
             addCallMessage(data, data.times)
             dispatch({ type: GLOBALTYPES.CALL, payload: null})
         })
 
         return () => socket.off('endCallToClient')
-    },[socket, dispatch, tracks, addCallMessage])
+    },[socket, dispatch, tracks, addCallMessage, newCall])
 
     // Stream media
     const openStream = (video) => {
@@ -109,6 +112,7 @@ const CallModal = () => {
                 playStream(otherVideo.current, remoteStream)
             });
             setAnswer(true)
+            setNewCall(newCall)
         })
     }
 
@@ -131,6 +135,7 @@ const CallModal = () => {
                 });
 
                 setAnswer(true)
+                setNewCall(newCall)
             })
         })
         return () => peer.removeListener('call')
@@ -140,7 +145,7 @@ const CallModal = () => {
     useEffect(() => {
         socket.on('callerDisconnect', () => {
             tracks && tracks.forEach(track => track.stop())
-
+            if(newCall) newCall.close()
             let times = answer ? total : 0
             addCallMessage(call, times, true)
 
@@ -152,26 +157,27 @@ const CallModal = () => {
         })
 
         return () => socket.off('callerDisconnect')
-    },[socket, tracks, dispatch, call, addCallMessage, answer, total])
+    },[socket, tracks, dispatch, call, addCallMessage, answer, total, newCall])
 
     // Play - Pause Audio
-    // const playAudio = (newAudio) => {
-    //     newAudio.play()
-    // }
+    const playAudio = (newAudio) => {
+        newAudio.play()
+    }
 
-    // const pauseAudio = (newAudio) => {
-    //     newAudio.pause()
-    //     newAudio.currentTime = 0
-    // }
+    const pauseAudio = (newAudio) => {
+        newAudio.pause()
+        newAudio.currentTime = 0
+    }
 
-    // useEffect(() => {
-    //     let newAudio = new Audio(RingRing)
-    //     if(answer){
-    //         pauseAudio(newAudio)
-    //     }else{
-    //         playAudio(newAudio)
-    //     }
-    // },[answer])
+    useEffect(() => {
+        let newAudio = new Audio(RingRing)
+        if(answer){
+            pauseAudio(newAudio)
+        }else{
+            playAudio(newAudio)
+        }
+        return () => pauseAudio(newAudio)
+    },[answer])
 
   return (
     <div className='call_modal'>
@@ -215,23 +221,23 @@ const CallModal = () => {
             }
 
             <div className='call_menu'>
-                <span className='material-icons text-danger' onClick={handleEndCall}>
+                <button className='material-icons text-danger' onClick={handleEndCall}>
                     call_end
-                </span>
+                </button>
 
                 {
                     (call.recipient === auth.user._id && !answer) && 
                         <>
                             {
                                 call.video
-                                ? <span className='material-icons text-success' 
+                                ? <button className='material-icons text-success' 
                                 onClick={handleAnswer}>
                                         videocam
-                                </span>
-                                : <span className='material-icons text-success' 
+                                </button>
+                                : <button className='material-icons text-success' 
                                 onClick={handleAnswer}>
                                         call
-                                </span>
+                                </button>
                             }
                         </>
                 }
@@ -245,8 +251,8 @@ const CallModal = () => {
                 opacity: (answer && call.video) ? '1' : '0',
                 filter: theme ? 'invert(1)' : 'invert(0)'
             }}>
-            <video ref={youVideo} className='you_video' autoPlay= 'true' muted= 'muted'/>
-            <video ref={otherVideo} className='other_video' autoPlay= 'true' muted= 'true' />
+            <video ref={youVideo} className='you_video' playsInline muted />
+            <video ref={otherVideo} className='other_video' playsInline />
 
             <div className='time_video'>
                 <span>{ hours.toString().length < 2 ? '0' + hours : hours }</span>
@@ -256,10 +262,10 @@ const CallModal = () => {
                 <span>{ second.toString().length < 2 ? '0' + second : second }</span>
             </div>
 
-            <span className='material-icons text-danger end_call' 
+            <button className='material-icons text-danger end_call' 
             onClick={handleEndCall}>
                 call_end
-            </span>
+            </button>
             
         </div>
         
