@@ -98,9 +98,22 @@ const CallModal = () => {
     const playStream = (tag, stream) => {
         let video = tag;
         video.srcObject = stream;
-        video.play()
-    }
+      
+        // Wait for the video element to load the metadata before playing
+        video.onloadedmetadata = () => {
+          video.play()
+            .then(() => {
+              // Video started playing successfully
+            })
+            .catch((error) => {
+              // Handle any errors during playback
+              console.error('Error while starting video playback:', error);
+            });
+        };
+      };
+      
 
+    
     // Answer Call
     const handleAnswer = () => {
         openStream(call.video).then(stream => {
@@ -171,14 +184,43 @@ const CallModal = () => {
     }
 
     useEffect(() => {
-        let newAudio = new Audio(RingRing)
-        if(answer){
-            pauseAudio(newAudio)
-        }else{
-            playAudio(newAudio)
+    let newAudio = new Audio(RingRing);
+
+    // Function to handle audio play
+    const playAudio = () => {
+        newAudio.play().catch((err) => {
+            // Play was interrupted or failed; handle the error here if needed.
+            console.log("Error playing audio:", err);
+        });
+    };
+
+    // Function to handle audio pause
+    const pauseAudio = () => {
+        newAudio.pause();
+        newAudio.currentTime = 0;
+    };
+
+    // Play or pause audio based on the answer state
+    if (answer) {
+        pauseAudio();
+    } else {
+        // Check if audio is loaded and ready to play
+        if (newAudio.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+            playAudio();
+        } else {
+            // If audio is not loaded yet, listen for the 'canplaythrough' event
+            newAudio.addEventListener("canplaythrough", playAudio);
         }
-        return () => pauseAudio(newAudio)
-    },[answer])
+    }
+
+    // Clean up the event listener and pause audio on unmount
+    return () => {
+        newAudio.removeEventListener("canplaythrough", playAudio);
+        pauseAudio();
+    };
+}, [answer]);
+
+
 
 
   return (
