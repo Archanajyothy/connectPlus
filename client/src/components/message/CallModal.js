@@ -15,6 +15,7 @@ const CallModal = () => {
     const [total, setTotal] = useState(0)
 
     const [answer, setAnswer] = useState(false)
+    const [audioStarted, setAudioStarted] = useState(false);
     const youVideo = useRef()
     const otherVideo = useRef()
     const [tracks, setTracks] = useState(null)
@@ -159,7 +160,7 @@ const CallModal = () => {
         return () => socket.off('callerDisconnect')
     },[socket, tracks, dispatch, call, addCallMessage, answer, total, newCall])
 
-    // Play - Pause Audio
+    //Play - Pause Audio
     const playAudio = (newAudio) => {
         newAudio.play()
     }
@@ -178,6 +179,7 @@ const CallModal = () => {
         }
         return () => pauseAudio(newAudio)
     },[answer])
+
 
   return (
     <div className='call_modal'>
