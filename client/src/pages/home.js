@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Status from '../components/home/Status'
 import Posts from '../components/home/Posts'
 import RightSidebar from '../components/home/RightSidebar'
