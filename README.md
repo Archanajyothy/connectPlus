@@ -1,6 +1,5 @@
 # ConnectPlus
 
-![ConnectPlus Logo](https://res.cloudinary.com/connect-plus/image/upload/v1688821707/connect-plus/Logo/icon-web-01_dsqwqu.svg){:height="100px" width="100px"}
 <img src="https://res.cloudinary.com/connect-plus/image/upload/v1688821707/connect-plus/Logo/icon-web-01_dsqwqu.svg" width="100" height="100">
 
 ## Description
