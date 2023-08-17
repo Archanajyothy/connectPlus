@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: '/api', // Set the base URL for all requests
+    baseURL: 'https://jinka-u5kf.onrender.com/api', // Set the base URL for all requests,
+    withCredentials: true
   });
   
 export const getDataAPI = async (url, token) => {

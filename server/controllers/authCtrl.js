@@ -30,6 +30,8 @@ const authCtrl = {
             const refresh_token = createRefreshToken({id: newUser._id})
 
             res.cookie('refreshtoken',refresh_token, {
+                sameSite: 'none', 
+                secure: true,
                 httpOnly: true,
                 path: '/api/refresh_token',
                 maxAge: 30*24*60*60*1000 // 30 days
@@ -67,6 +69,8 @@ const authCtrl = {
             const refresh_token = createRefreshToken({id: user._id})
 
             res.cookie('refreshtoken',refresh_token, {
+                sameSite: 'none', 
+                secure: true,
                 httpOnly: true,
                 path: '/api/refresh_token',
                 maxAge: 30*24*60*60*1000 // 30 days
