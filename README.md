@@ -1,5 +1,4 @@
-<img src="https://res.cloudinary.com/connect-plus/image/upload/v1688821707/connect-plus/Logo/icon-web-01_dsqwqu.svg" width="50" height="50"> # ConnectPlus 
-
+<img src="https://res.cloudinary.com/connect-plus/image/upload/v1688821709/connect-plus/Logo/logo_ohxzft.png" width="100" height="100">
 ## Description
 ConnectPlus is a cutting-edge social media platform that revolutionizes the way you connect and share your life moments. Built using ReactJS, NodeJS, SocketIO, MongoDB, and ExpressJS, ConnectPlus offers a seamless and immersive experience similar to Instagram, but with a host of exciting features to enhance your social networking journey.
 
