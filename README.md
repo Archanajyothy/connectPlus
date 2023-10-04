@@ -17,7 +17,7 @@ Discover a new world of social networking with ConnectPlus, where communication,
 
 ## Screenshots
 
-![Screenshot 1]("./assets/home.png")
+![Screenshot 1]("/assets/home.png")
 ![Screenshot 2]("./assets/create post.png")
 ![Screenshot 3]("./assets/notification.png")
 ![Screenshot 4]("./assets/comment and likes.png")
