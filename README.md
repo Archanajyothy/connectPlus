@@ -17,13 +17,14 @@ Discover a new world of social networking with ConnectPlus, where communication,
 
 ## Screenshots
 
-![Screenshot 1](link_to_screenshot1)
-![Screenshot 2](link_to_screenshot2)
-![Screenshot 3](link_to_screenshot3)
-
-## Demo Video
-
-[Link to Demo Video](link_to_demo_video)
+![Screenshot 1]("./assets/home.png")
+![Screenshot 2]("./assets/create post.png")
+![Screenshot 3]("./assets/notification.png")
+![Screenshot 4]("./assets/comment and likes.png")
+![Screenshot 5]("./assets/discover.png")
+![Screenshot 6]("./assets/messages.png")
+![Screenshot 7]("./assets/darkmode.png")
+![Screenshot 8]("./assets/user_profile.png")
 
 ## How to Install
 
